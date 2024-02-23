@@ -36,6 +36,3 @@ def start_vending_machine
 end
 
 start_vending_machine
-
-
-start_vending_machine

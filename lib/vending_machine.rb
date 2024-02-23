@@ -37,7 +37,7 @@ class VendingMachine
     dispense(product_name)
     change_given = calculate_change(product.price)
     puts "Dispensing product: #{product_name}"
-    unless change_given.empty?
+    unless change_given
       puts "Dispensing change: #{change_given.join(', ')}"
     end
     reset_transaction
