@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/product'
-require_relative '../lib/coin'
-require_relative '../lib/vending_machine'
-require_relative '../lib/payable'
-require_relative '../lib/dispensable'
-require_relative '../lib/reportable'
-require_relative '../lib/inventory_management'
-require_relative '../lib/currency'
+require_relative './lib/product'
+require_relative './lib/coin'
+require_relative './lib/vending_machine'
+require_relative './lib/payable'
+require_relative './lib/dispensable'
+require_relative './lib/reportable'
+require_relative './lib/inventory_management'
+require_relative './lib/currency'
 
 def start_vending_machine
   vm = VendingMachine.new

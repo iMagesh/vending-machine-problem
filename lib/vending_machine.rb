@@ -12,13 +12,13 @@ class VendingMachine
   def initialize
     @inventory = []
     @coins = []
-    @total_inserted = 0
+    @total_inserted = 0.0
+    initialize_currency  # Ensure the Currency module is initialized
   end
 
   def insert_coin(coin)
-    @coins << coin
-    @total_inserted += coin.denomination
-    puts "#{coin.denomination} coin inserted."
+    success = super(coin)  # Use super to call insert_coin from Currency module
+    puts "#{coin.denomination} coin inserted." if success
   end
 
   def select_product(product_name)
@@ -26,29 +26,28 @@ class VendingMachine
     if product.nil?
       puts "Product not found."
       return
-    end
-    if product.quantity <= 0
+    elsif product.quantity <= 0
       puts "Product sold out."
       return
-    end
-    if product.price > @total_inserted
+    elsif !sufficient_funds?(product.price)
       puts "Insufficient funds."
       return
     end
 
     dispense(product_name)
-    give_change(product.price)
+    change_given = calculate_change(product.price)
+    puts "Dispensing product: #{product_name}"
+    unless change_given.empty?
+      puts "Dispensing change: #{change_given.join(', ')}"
+    end
     reset_transaction
   end
 
-  def give_change(price)
-    change = @total_inserted - price
-    puts "Dispensing #{change} in change." if change > 0
+  def sufficient_funds?(price)
+    @total_inserted >= price
   end
 
-  def reset_transaction
-    @total_inserted = 0
-  end
+  # Assuming dispense method reduces quantity and is already correctly implemented
 
   def show_products
     puts "Available products:"
