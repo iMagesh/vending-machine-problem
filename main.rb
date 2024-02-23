@@ -18,11 +18,6 @@ def start_vending_machine
   loop do
     puts "\nWelcome to the Vending Machine!"
     vm.show_products
-    puts "Please select a product by name or type 'exit' to quit:"
-    choice = gets.chomp
-    break if choice == "exit"
-
-    vm.select_product(choice)
 
     puts "Insert coins (type 'done' when finished):"
     loop do
@@ -30,6 +25,12 @@ def start_vending_machine
       break if coin_input == "done"
       vm.insert_coin(Coin.new(coin_input.to_f))
     end
+
+    puts "Please select a product by name or type 'exit' to quit:"
+    choice = gets.chomp
+    break if choice == "exit"
+
+    vm.select_product(choice)
   end
 
   puts "Thank you for using the Vending Machine!"
